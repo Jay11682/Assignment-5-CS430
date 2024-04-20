@@ -13,11 +13,11 @@ import java.util.List;
 import com.example.model.User;
 import com.google.gson.Gson;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/search")
 public class UserSearchServlet extends HttpServlet {
@@ -25,8 +25,8 @@ public class UserSearchServlet extends HttpServlet {
 
     // JDBC URL, username, and password
 	private static final String JDBC_URL = "jdbc:mysql://faure.cs.colostate.edu:3306/";
-    private static final String JDBC_USERNAME = "";
-    private static final String JDBC_PASSWORD = "";
+    private static final String JDBC_USERNAME = "jaysnell";
+    private static final String JDBC_PASSWORD = "833039495";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = request.getParameter("userName");
