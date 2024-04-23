@@ -45,22 +45,31 @@ public class UserAddServlet extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+            // Establish database connection
             connection = DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
+
+            // Prepare SQL statement
             String sql = "INSERT INTO Users (UserID, UserName, UserType) VALUES (?, ?, ?)";
             statement = connection.prepareStatement(sql);
             statement.setString(1, userID);
             statement.setString(2, userName);
             statement.setString(3, userType);
+
+            // Execute query
             statement.executeUpdate();
 
+            // Send as response
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
+            
+            // Show that user was added
             out.print("User added successfully.");
             out.flush();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
+            // Close resources
             try { if (statement != null) statement.close(); } catch (SQLException e) { e.printStackTrace(); }
             try { if (connection != null) connection.close(); } catch (SQLException e) { e.printStackTrace(); }
         }
