@@ -63,3 +63,59 @@ function addUser() {
     })
     .catch(error => console.error('Error:', error));
 }
+
+function updateUser() {
+    var oldUserID = document.getElementById('oldUserID').value.trim();
+    var updateUserName = document.getElementById('updateUserName').value.trim();
+    var updateUserType = document.getElementById('updateUserType').value.trim();
+    
+    if (oldUserID === "" || updateUserName === "" || updateUserType === "") {
+        alert("Please fill in all fields to update the user.");
+        return;
+    }
+
+    fetch('/demo/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'oldUserID=' + encodeURIComponent(oldUserID) + '&updateUserName=' + encodeURIComponent(updateUserName) + '&updateUserType=' + encodeURIComponent(updateUserType)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('updateUserResult').textContent = data;
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function deleteUser() {
+    var deleteUserID = document.getElementById('deleteUserID').value.trim();
+    
+    if (deleteUserID === "") {
+        alert("Please fill in the user ID to delete the user.");
+        return;
+    }
+
+    fetch('/demo/delete', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'deleteUserID=' + encodeURIComponent(deleteUserID)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('deleteUserResult').textContent = data;
+    })
+    .catch(error => console.error('Error:', error));
+}

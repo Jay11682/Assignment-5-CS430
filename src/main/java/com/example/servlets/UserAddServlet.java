@@ -53,7 +53,6 @@ public class UserAddServlet extends HttpServlet {
             statement.setString(3, userType);
             statement.executeUpdate();
 
-            // Sending success response
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
@@ -61,8 +60,6 @@ public class UserAddServlet extends HttpServlet {
             out.flush();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            // Sending error response
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error adding user to the database.");
         } finally {
             try { if (statement != null) statement.close(); } catch (SQLException e) { e.printStackTrace(); }
             try { if (connection != null) connection.close(); } catch (SQLException e) { e.printStackTrace(); }
