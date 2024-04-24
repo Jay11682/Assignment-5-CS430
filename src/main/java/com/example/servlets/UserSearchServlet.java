@@ -29,7 +29,7 @@ public class UserSearchServlet extends HttpServlet {
     private static final String JDBC_PASSWORD = "833039495";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String searchInput = request.getParameter("searchInput");
+        String searchInput = request.getParameter("userName");
         List<User> searchResult = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
