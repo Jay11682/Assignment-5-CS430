@@ -1,7 +1,7 @@
 function searchUsers() {
     var searchInput = document.getElementById('searchInput').value.trim();
     if (searchInput === "") {
-        alert("Please enter a user name to search.");
+        alert("Please enter a user name or user ID to search.");
         return;
     }
 

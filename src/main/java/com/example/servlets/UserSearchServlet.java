@@ -29,7 +29,7 @@ public class UserSearchServlet extends HttpServlet {
     private static final String JDBC_PASSWORD = "833039495";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userName = request.getParameter("userName");
+        String searchInput = request.getParameter("searchInput");
         List<User> searchResult = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
@@ -46,9 +46,10 @@ public class UserSearchServlet extends HttpServlet {
         	 connection = DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
 
             // Prepare SQL statement
-            String sql = "SELECT * FROM Users WHERE UserName LIKE ?";
+            String sql = "SELECT * FROM Users WHERE UserName LIKE ? OR UserID = ?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, "%" + userName + "%");
+            statement.setString(1, "%" + searchInput + "%");
+            statement.setString(2, searchInput);
 
             // Execute query
             resultSet = statement.executeQuery();
