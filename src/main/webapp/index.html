@@ -36,6 +36,23 @@
         <button onclick="deleteUser()">Delete User</button>
         <div id="deleteUserResult"></div>
     </div>
+    <div>
+        <h2>Add Use Record</h2>
+        <input type="text" id="useUserID" placeholder="Enter user name or user ID">
+        <input type="text" id="deviceType" placeholder="Enter device name or device ID">
+        <input type="text" id="useDate" placeholder="Enter usage date (yyyy-mm-dd)">
+        <input type="text" id="useTime" placeholder="Enter usage duration (hours)">
+        <button onclick="addUseRecord()">Add record</button>
+        <div id="addUseRecord"></div>
+    </div>
+    <div>
+        <h2>Search Device Usage</h2>
+        <input type="text" id="searchDeviceUserID" placeholder="Enter user ID">
+        <input type="text" id="date1" placeholder="Enter starting date range (yyyy-mm-dd)">
+        <input type="text" id="date2" placeholder="Enter ending date range (yyyy-mm-dd)">
+        <button onclick="searchDeviceUsage()">Search Usage</button>
+        <div id="searchDeviceUsage"></div>
+    </div>
 
     <script src="app.js"></script>
 </body>
