@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.example.model.Use;
 import com.example.model.User;
+import com.example.model.UseDevice;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -34,7 +35,7 @@ public class UserSearchDeviceUsageServlet extends HttpServlet {
         String date1 = request.getParameter("date1");
         String date2 = request.getParameter("date2");
         
-        List<Use> deviceUsageList = new ArrayList<>();
+        List<UseDevice> deviceUsageList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -64,8 +65,8 @@ public class UserSearchDeviceUsageServlet extends HttpServlet {
                 String deviceType = resultSet.getString("DeviceType");
                 String usageDate = resultSet.getString("UsageDate");
                 int usageDuration = resultSet.getInt("UsageDuration");
-                Use use = new Use(userID, deviceID, usageDate, usageDuration);
-                deviceUsageList.add(use);
+                UseDevice composite = new UseDevice(userID, userName, deviceID, deviceName, deviceType, usageDate, usageDuration);
+                deviceUsageList.add(composite);
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

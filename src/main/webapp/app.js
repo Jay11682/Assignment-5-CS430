@@ -151,9 +151,9 @@ function displayDeviceUsageResult(deviceUsage) {
         searchResultDiv.textContent = "No device usage found.";
     } else {
         var usageList = document.createElement('ul');
-        deviceUsage.forEach(usage => {
+        deviceUsage.forEach(composite => {
             var listItem = document.createElement('li');
-            listItem.textContent = 'Device: ' + usage.deviceName + ', Usage Duration: ' + usage.usageDuration + ' hours';
+            listItem.textContent = 'User: ' + composite.userName + ', Device: ' + composite.deviceName + ', Usage Duration: ' + composite.usageDuration + ' hours';
             usageList.appendChild(listItem);
         });
         searchResultDiv.appendChild(usageList);
