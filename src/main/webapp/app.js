@@ -120,6 +120,36 @@ function deleteUser() {
     .catch(error => console.error('Error:', error));
 }
 
+function addUseRecord() {
+    var userID = document.getElementById('useUserID').value.trim();
+    var deviceID = document.getElementById('deviceType').value.trim();
+    var usageDate = document.getElementById('useDate').value.trim();
+    var usageDuration = document.getElementById('useTime').value.trim();
+    
+    if (userID === "" || deviceID === "" || usageDate === "" || usageDuration === "") {
+        alert("Please fill in all fields to add a use record.");
+        return;
+    }
+
+    fetch('/demo/addUseRecord', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'userID=' + encodeURIComponent(userID) + '&deviceID=' + encodeURIComponent(deviceID) + '&usageDate=' + encodeURIComponent(usageDate) + '&usageDuration=' + encodeURIComponent(usageDuration)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById('addUseRecord').textContent = data;
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 function searchDeviceUsage() {
     var userId = document.getElementById('searchDeviceUserID').value.trim();
     var date1 = document.getElementById('date1').value.trim();
@@ -153,7 +183,7 @@ function displayDeviceUsageResult(deviceUsage) {
         var usageList = document.createElement('ul');
         deviceUsage.forEach(composite => {
             var listItem = document.createElement('li');
-            listItem.textContent = 'User: ' + composite.userName + ', Device: ' + composite.deviceName + ', Usage Duration: ' + composite.usageDuration + ' hours';
+            listItem.textContent = 'User: ' + composite.userName + ', Device: ' + composite.deviceName + ', Usage Date: ' + composite.usageDate + ', Usage Duration: ' + composite.usageDuration + ' hours';
             usageList.appendChild(listItem);
         });
         searchResultDiv.appendChild(usageList);
