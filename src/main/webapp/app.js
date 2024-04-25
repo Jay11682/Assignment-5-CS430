@@ -119,3 +119,43 @@ function deleteUser() {
     })
     .catch(error => console.error('Error:', error));
 }
+
+function searchDeviceUsage() {
+    var userId = document.getElementById('searchDeviceUserID').value.trim();
+    var date1 = document.getElementById('date1').value.trim();
+    var date2 = document.getElementById('date2').value.trim();
+
+    if (userId === "" || date1 === "" || date2 === "") {
+        alert("Please enter user ID and date range.");
+        return;
+    }
+
+    fetch('/demo/searchDeviceUsage?userId=' + userId + '&date1=' + date1 + '&date2=' + date2)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayDeviceUsageResult(data);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function displayDeviceUsageResult(deviceUsage) {
+    var searchResultDiv = document.getElementById('searchDeviceUsage');
+    searchResultDiv.innerHTML = "";
+
+    if (deviceUsage.length === 0) {
+        searchResultDiv.textContent = "No device usage found.";
+    } else {
+        var usageList = document.createElement('ul');
+        deviceUsage.forEach(usage => {
+            var listItem = document.createElement('li');
+            listItem.textContent = 'Device: ' + usage.deviceName + ', Usage Duration: ' + usage.usageDuration + ' hours';
+            usageList.appendChild(listItem);
+        });
+        searchResultDiv.appendChild(usageList);
+    }
+}
