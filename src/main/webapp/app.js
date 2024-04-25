@@ -28,7 +28,7 @@ function displaySearchResult(users) {
         var userList = document.createElement('ul');
         users.forEach(user => {
             var listItem = document.createElement('li');
-            listItem.textContent = user.userName + ' - ' + user.userType; // Update property names according to the backend
+            listItem.textContent = user.userName + ' - ' + user.userType + ", UserID: " + user.userId; // Update property names according to the backend
             userList.appendChild(listItem);
         });
         searchResultDiv.appendChild(userList);
